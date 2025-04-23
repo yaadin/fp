@@ -7,7 +7,8 @@ with conn:
     CREATE TABLE IF NOT EXISTS Customers (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
         name TEXT NOT NULL,
-        email TEXT NOT NULL UNIQUE
+        email TEXT NOT NULL UNIQUE,
+        password TEXT NOT NULL
     )
     """)
 
@@ -46,6 +47,13 @@ with conn:
         booked_at TEXT NOT NULL,
         FOREIGN KEY (screening_id) REFERENCES Screenings(id),
         FOREIGN KEY (customer_id) REFERENCES Customers(id)
+    )
+    """)
+
+    conn.execute("""
+    CREATE TABLE IF NOT EXISTS Codes(
+        email TEXT,
+        code INTEGER
     )
     """)
    
