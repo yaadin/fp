@@ -7,7 +7,7 @@ from PyQt6.QtCore import Qt
 from controller.bookings import list_movies, list_screenings, book_ticket
 
 
-THUMB_W, THUMB_H = 80, 120   # размер миниатюры
+THUMB_W, THUMB_H = 80, 120   
 
 
 class NewBookingTab(QWidget):
@@ -18,42 +18,38 @@ class NewBookingTab(QWidget):
 
         main = QVBoxLayout(self)
 
-        # --- список фильмов с постерами ---
+     
         self.movie_view = QListView()
         self.movie_model = QStandardItemModel(self.movie_view)
         self.movie_view.setModel(self.movie_model)
         self.movie_view.clicked.connect(self.on_movie_clicked)
         main.addWidget(self.movie_view)
 
-        # --- список сеансов выбранного фильма ---
+
         self.screening_list = QListWidget()
         self.screening_list.itemClicked.connect(self.book_selected_screening)
         main.addWidget(self.screening_list)
 
         self.load_movies()
 
-    # ------------------------------------------------------------------ #
-    # загрузка фильмов в модель с постерами
+
     def load_movies(self):
         self.movies = list_movies()
         self.movie_model.clear()
 
         for movie in self.movies:
             item = QStandardItem(f"{movie.title}  |  rating: {movie.rating}  |  description: {movie.description}  |  genre: {movie.genre}")
-            # создать миниатюру постера
             try:
                 pixmap = QPixmap(movie.picture) \
                     .scaled(THUMB_W, THUMB_H, Qt.AspectRatioMode.KeepAspectRatio,
                             Qt.TransformationMode.SmoothTransformation)
                 item.setIcon(QIcon(pixmap))
             except Exception:
-                pass   # если картинка не загрузилась – просто текст
-            # отключаем редактирование
+                pass   
             item.setEditable(False)
             self.movie_model.appendRow(item)
 
-    # ------------------------------------------------------------------ #
-    # при клике на фильм загружаем список сеансов
+
     def on_movie_clicked(self, index):
         self.selected_movie = self.movies[index.row()]
         self.load_screenings()
@@ -67,8 +63,7 @@ class NewBookingTab(QWidget):
                 f"{s.datetime}  |  {s.hall}  |  Осталось мест: {s.seats_left}"
             )
 
-    # ------------------------------------------------------------------ #
-    # бронируем выбранный сеанс
+
     def book_selected_screening(self, item):
         index = self.screening_list.row(item)
         screening = list_screenings(self.selected_movie.id)[index]

@@ -25,7 +25,7 @@ def send_email_code(receiver_email: str, code: str):
             server.login(SENDER_EMAIL, SENDER_PASSWORD)  
             server.send_message(msg)  
 
-        print(f"📬 Код успешно отправлен на {receiver_email}")
+        print(f"Код успешно отправлен на {receiver_email}")
     except Exception as e:
-        print("❌ Ошибка при отправке письма:", e)
+        print("Ошибка при отправке письма:", e)
 

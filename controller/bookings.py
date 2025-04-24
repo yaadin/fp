@@ -41,7 +41,8 @@ def get_my_bookings(customer_id):
             "picture"    : movie.picture,     
             "datetime"   : screening.datetime,
             "hall"       : screening.hall,
-            "seats"      : b.seats
+            "seats"      : b.seats,
+            "hall"       : screening.hall
         })
     result.sort(key=lambda x: x["datetime"])
     return result
