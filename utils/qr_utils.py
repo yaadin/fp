@@ -3,7 +3,7 @@ from io import BytesIO
 from PyQt6.QtGui import QPixmap
 from PyQt6.QtCore import Qt
 
-# соответствие «зал → ссылка 2ГИС»
+
 MAP_LINKS = {
     "Cosmo Park": "https://2gis.kg/bishkek/firm/70000001019320032",
     "Bishkek Park" : "https://2gis.kg/bishkek/search/%D0%B1%D0%B8%D1%88%D0%BA%D0%B5%D0%BA%20%D0%BF%D0%B0%D1%80%D0%BA/firm/70000001019343641/74.590311%2C42.874854?m=74.590311%2C42.874854%2F15.69",
